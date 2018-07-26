@@ -1,0 +1,29 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "eqeqeq": ["warn"],
+    "no-const-assign": ["error"],
+    "no-empty": ["error"],
+    "no-use-before-define": ["error"],
+    "no-console": ["off"]
+  },
+  "env": {
+    "node": true,
+    "browser": true
+  }
+}
