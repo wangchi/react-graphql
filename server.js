@@ -12,7 +12,8 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // Fake data
-const books = [
+let incrementID = 3;
+const BOOKS = [
   {
     id: 1,
     title: 'HTML5 Tutorial',
@@ -47,7 +48,9 @@ const typeDefs = gql`
     book(id: Int!):Book
   }
   type Mutation {
-    addBook(name:String!):Book
+    addBook(title: String!, author: String!):Book
+    updateBook(id: Int!, title: String, author: String):Book
+    deleteBook(id: Int!):Book
   }
   schema {
     query: Query
@@ -59,15 +62,39 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     books(root, args, context) {
-      return books;
+      return BOOKS;
     },
     book(root, args, context, info) {
-      return books.filter(book => book.id === args.id)[0];
+      return BOOKS.filter(book => book.id === args.id)[0];
     }
   },
   Mutation: {
     addBook(root, args, context) {
-      return {id: 4, title: args.title};
+      let newBook = {id: ++incrementID, date: new Date(), ...args};
+      // fake add book
+      BOOKS.push(newBook);
+      return newBook;
+    },
+    updateBook(root, args, context) {
+      let modifiedBook = {};
+      // fake update book
+      BOOKS.forEach(book => {
+        if (book.id === args.id) {
+          Object.assign(book, args);
+          modifiedBook = book;
+        }
+      });
+      return modifiedBook;
+    },
+    deleteBook(root, args, context) {
+      let deletedBook = {};
+      BOOKS.forEach((book, i) => {
+        if (book.id === args.id) {
+          BOOKS.splice(i, 1);
+          deletedBook = book;
+        }
+      });
+      return deletedBook;
     }
   },
   Date: new GraphQLScalarType({
