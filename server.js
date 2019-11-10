@@ -18,26 +18,26 @@ const BOOKS = [
     id: 1,
     title: 'HTML5 Tutorial',
     author: 'xiaowang',
-    date: new Date(2018, 7, 20)
+    date: new Date(2018, 7, 20),
   },
   {
     id: 2,
     title: 'Deep Learning With React',
     author: 'xiaoli',
-    date: new Date(2018, 7, 21)
+    date: new Date(2018, 7, 21),
   },
   {
     id: 3,
     title: 'Vue Cookbook',
     author: 'xiaoming',
-    date: new Date(2018, 7, 22)
-  }
+    date: new Date(2018, 7, 22),
+  },
 ];
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   scalar Date
-  type Book{
+  type Book {
     id: Int!
     title: String
     author: String
@@ -45,12 +45,12 @@ const typeDefs = gql`
   }
   type Query {
     books: [Book]
-    book(id: Int!):Book
+    book(id: Int!): Book
   }
   type Mutation {
-    addBook(title: String!, author: String!):Book
-    updateBook(id: Int!, title: String, author: String):Book
-    deleteBook(id: Int!):Book
+    addBook(title: String!, author: String!): Book
+    updateBook(id: Int!, title: String, author: String): Book
+    deleteBook(id: Int!): Book
   }
   schema {
     query: Query
@@ -66,11 +66,11 @@ const resolvers = {
     },
     book(root, args, context, info) {
       return BOOKS.filter(book => book.id === args.id)[0];
-    }
+    },
   },
   Mutation: {
     addBook(root, args, context) {
-      let newBook = {id: ++incrementID, date: new Date(), ...args};
+      let newBook = { id: ++incrementID, date: new Date(), ...args };
       // fake add book
       BOOKS.push(newBook);
       return newBook;
@@ -95,7 +95,7 @@ const resolvers = {
         }
       });
       return deletedBook;
-    }
+    },
   },
   Date: new GraphQLScalarType({
     name: 'Date',
@@ -119,4 +119,4 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.applyMiddleware({ app });
 
 const PORT = process.env.PROT || 4000;
-app.listen(PORT, ()=>console.log('app running in http://localhost:' + PORT));
+app.listen(PORT, () => console.log('app running in http://localhost:' + PORT));

@@ -9,12 +9,12 @@ import App from './App';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: 'http://127.0.0.1:4000/graphql' }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App/>
+    <App />
   </ApolloProvider>,
-  document.getElementById('app')
+  document.getElementById('root')
 );

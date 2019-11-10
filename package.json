@@ -2,38 +2,39 @@
   "name": "react-graphql",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Wang Chi",
+  "author": "Blues Dari <bluesdari@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "node server.js & npm run webpack-dev",
     "webpack-dev": "webpack-dev-server --config ./webpack.dev.config.js --hot"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "^1.2.5",
-    "apollo-client": "^2.3.5",
-    "apollo-link-http": "^1.5.4",
-    "apollo-server-koa": "^2.0.0",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
+    "apollo-server-koa": "^2.9.7",
     "graphql": "^0.13.2",
-    "graphql-tag": "^2.9.2",
-    "graphql-tools": "^3.0.5",
-    "koa": "^2.5.2",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^3.1.1",
+    "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "react": "^16.4.1",
-    "react-apollo": "^2.1.9",
-    "react-dom": "^16.4.1"
+    "react": "^16.11.0",
+    "react-apollo": "^2.5.8",
+    "react-dom": "^16.11.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@hot-loader/react-dom": "^16.11.0",
+    "babel-loader": "^8.0.0",
     "eslint": "^5.2.0",
     "eslint-plugin-react": "^7.10.0",
     "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.3.3",
-    "webpack": "^4.16.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }

@@ -5,7 +5,7 @@ Use GraphQL in React Koa project
 ## Usage
 
 ```
-yarn install
+npm install
 npm start
 ```
 
@@ -16,6 +16,7 @@ Visit React App at `http://127.0.0.1:4001`
 ## Use Case
 
 query all
+
 ```graphql
 query {
   books {
@@ -28,9 +29,10 @@ query {
 ```
 
 query one
+
 ```graphql
 query {
-  book (id: 1) {
+  book(id: 1) {
     id
     title
     author
@@ -40,9 +42,10 @@ query {
 ```
 
 mutation, add data
+
 ```graphql
 mutation {
-  addBook (title: "Hello GraphQL", author: "Tom") {
+  addBook(title: "Hello GraphQL", author: "Tom") {
     id
     title
     author
@@ -52,9 +55,10 @@ mutation {
 ```
 
 mutation, update data
+
 ```graphql
 mutation {
-  updateBook (id: 1, title: "HTML5 Tutorial Pro", author: "Tom") {
+  updateBook(id: 1, title: "HTML5 Tutorial Pro", author: "Tom") {
     id
     title
     author
@@ -64,9 +68,10 @@ mutation {
 ```
 
 mutation, delete data
+
 ```graphql
 mutation {
-  deleteBook (id: 1) {
+  deleteBook(id: 1) {
     id
     title
     author
