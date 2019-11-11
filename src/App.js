@@ -1,8 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
 const GET_BOOKS = gql`
   {
@@ -15,53 +14,23 @@ const GET_BOOKS = gql`
 `;
 
 const App = () => {
+  const { loading, error, data } = useQuery(GET_BOOKS);
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
   return (
     <div>
       <p>Book Lists</p>
-      <Query query={GET_BOOKS}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-          // console.log(data);
-          return (
-            <ul>
-              {data.books.map(book => (
-                <li key={book.id}>
-                  {book.id}, {book.title}, {book.author}
-                </li>
-              ))}
-            </ul>
-          );
-        }}
-      </Query>
+      <ul>
+        {data.books.map(book => (
+          <li key={book.id}>
+            {book.id}, {book.title}, {book.author}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <p>Book Lists</p>
-//         <Query query={GET_BOOKS}>
-//           {({ loading, error, data }) => {
-//             if (loading) return 'Loading...';
-//             if (error) return `Error! ${error.message}`;
-//             // console.log(data);
-//             return (
-//               <ul>
-//                 {data.books.map(book => (
-//                   <li key={book.id}>
-//                     {book.id}, {book.title}, {book.author}
-//                   </li>
-//                 ))}
-//               </ul>
-//             );
-//           }}
-//         </Query>
-//       </div>
-//     );
-//   }
-// }
 
 export default hot(App);
