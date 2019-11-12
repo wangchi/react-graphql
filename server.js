@@ -1,15 +1,12 @@
 const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('koa-router')();
+const serve = require('koa-static');
 const { ApolloServer, gql } = require('apollo-server-koa');
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 
 const app = new Koa();
 
-app.use(bodyParser());
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(serve('./public'));
 
 // Fake data
 let incrementID = 3;
@@ -61,21 +58,21 @@ const typeDefs = gql`
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    books(root, args, context) {
+    books() {
       return BOOKS;
     },
-    book(root, args, context, info) {
+    book(root, args) {
       return BOOKS.filter(book => book.id === args.id)[0];
     },
   },
   Mutation: {
-    addBook(root, args, context) {
+    addBook(root, args) {
       let newBook = { id: ++incrementID, date: new Date(), ...args };
       // fake add book
       BOOKS.push(newBook);
       return newBook;
     },
-    updateBook(root, args, context) {
+    updateBook(root, args) {
       let modifiedBook = {};
       // fake update book
       BOOKS.forEach(book => {
@@ -86,7 +83,7 @@ const resolvers = {
       });
       return modifiedBook;
     },
-    deleteBook(root, args, context) {
+    deleteBook(root, args) {
       let deletedBook = {};
       BOOKS.forEach((book, i) => {
         if (book.id === args.id) {
@@ -119,4 +116,4 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.applyMiddleware({ app });
 
 const PORT = process.env.PROT || 4000;
-app.listen(PORT, () => console.log('app running in http://localhost:' + PORT));
+app.listen(PORT, () => console.log(`App running in http://localhost:${PORT}`));

@@ -6,20 +6,19 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js & npm run webpack-dev",
-    "webpack-dev": "webpack-dev-server --config ./webpack.dev.config.js --hot"
+    "webpack-dev": "webpack-dev-server --config ./webpack.dev.config.js --hot",
+    "build": "webpack --config ./webpack.prod.config.js",
+    "serve": "node server.js"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
     "apollo-boost": "^0.4.4",
-    "apollo-cache-inmemory": "^1.6.3",
-    "apollo-link-http": "^1.5.16",
     "apollo-server-koa": "^2.9.7",
     "graphql": "^0.13.2",
-    "graphql-tag": "^2.10.1",
-    "graphql-tools": "^3.1.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
@@ -34,6 +33,7 @@
     "eslint-plugin-react": "^7.10.0",
     "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.3.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"

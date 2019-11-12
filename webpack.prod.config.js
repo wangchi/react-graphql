@@ -1,17 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/public',
     filename: 'bundle.js',
-  },
-  devServer: {
-    port: 4001,
-    inline: true,
-    hot: true,
-    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -22,11 +16,14 @@ module.exports = {
       },
     ],
   },
-  mode: 'development',
+  mode: 'production',
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   },
   plugins: [
     new HtmlWebpackPlugin({
